@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import Nav from "./components/Nav.jsx";
 import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
@@ -8,7 +8,7 @@ import Activities from "./pages/Activities.jsx";
 import Resources from "./pages/Resources.jsx";
 import Community from "./pages/Community.jsx";
 import Contact from "./pages/Contact.jsx";
-import { useRouter } from "./lib/router";
+import { useRouter } from "./lib/router.jsx";
 
 const routes = [
   { path: "/", el: <Home /> },
@@ -22,7 +22,8 @@ const routes = [
 
 export default function App() {
   const { path } = useRouter();
-  const match = routes.find((r) => r.path === path) || routes[0];
+  const match = routes.find((route) => route.path === path) || routes[0];
+
   return (
     <div>
       <Nav brand="littlelopp.ro" />
