@@ -30,7 +30,9 @@ export default function Nav({ brand = "littleloop.ro" }) {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [activePath, setActivePath] = React.useState("/");
   const [showAnnouncement, setShowAnnouncement] = React.useState(true);
+  const [isHeroScrollZone, setIsHeroScrollZone] = React.useState(false);
   const heroThresholdRef = React.useRef(0);
+  const heroElRef = React.useRef(null);
   const leftLinks = React.useMemo(() => navLinks.slice(0, 4), []);
   const rightLinks = React.useMemo(() => navLinks.slice(4, 7), []);
   const ctaLink = navLinks[7];
@@ -48,7 +50,8 @@ export default function Nav({ brand = "littleloop.ro" }) {
 
   React.useEffect(() => {
     if (typeof window === "undefined") return undefined;
-    const heroEl = document.querySelector(".hero");
+    const heroEl = heroElRef.current || document.querySelector(".hero");
+    if (heroEl && !heroElRef.current) heroElRef.current = heroEl;
     const updateScrollState = (scrollPos) => {
       const heroThreshold = heroThresholdRef.current;
       const shouldBeScrolled =
@@ -97,6 +100,11 @@ export default function Nav({ brand = "littleloop.ro" }) {
         heroThreshold <= 0 ? scrollY > 0 : scrollY >= heroThreshold;
       setIsScrolled(shouldBeScrolled);
       setShowAnnouncement(scrollY < ANNOUNCEMENT_HIDE_SCROLL);
+      const heroZoneActive =
+        heroThreshold > 0
+          ? scrollY > 24 && scrollY < heroThreshold
+          : scrollY > 24 && !shouldBeScrolled;
+      setIsHeroScrollZone(heroZoneActive);
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -106,6 +114,11 @@ export default function Nav({ brand = "littleloop.ro" }) {
   const navClassNames = ["nav"];
   if (isScrolled) navClassNames.push("nav-scrolled");
   if (showAnnouncement) navClassNames.push("nav-with-announcement");
+  if (isScrolled) {
+    navClassNames.push("nav-visible");
+  } else if (isHeroScrollZone) {
+    navClassNames.push("nav-hidden");
+  }
 
   return (
     <>
