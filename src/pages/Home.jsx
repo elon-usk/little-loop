@@ -151,9 +151,6 @@ export default function Home() {
                 Trimite
               </button>
             </form>
-            <p className="hero-helper">
-              Sunt aici pentru tine și pentru cei mici, curaj!
-            </p>
           </div>
         </div>
       </header>
