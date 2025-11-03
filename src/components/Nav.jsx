@@ -51,7 +51,8 @@ export default function Nav({ brand = "littleloop.ro" }) {
     const heroEl = document.querySelector(".hero");
     const updateScrollState = (scrollPos) => {
       const heroThreshold = heroThresholdRef.current;
-      const shouldBeScrolled = heroThreshold <= 0 ? scrollPos > 0 : scrollPos >= heroThreshold;
+      const shouldBeScrolled =
+        heroThreshold <= 0 ? scrollPos > 0 : scrollPos >= heroThreshold;
       setIsScrolled(shouldBeScrolled);
       setShowAnnouncement(scrollPos < ANNOUNCEMENT_HIDE_SCROLL);
     };
@@ -92,7 +93,8 @@ export default function Nav({ brand = "littleloop.ro" }) {
     const handleScroll = () => {
       const scrollY = window.scrollY || window.pageYOffset || 0;
       const heroThreshold = heroThresholdRef.current;
-      const shouldBeScrolled = heroThreshold <= 0 ? scrollY > 0 : scrollY >= heroThreshold;
+      const shouldBeScrolled =
+        heroThreshold <= 0 ? scrollY > 0 : scrollY >= heroThreshold;
       setIsScrolled(shouldBeScrolled);
       setShowAnnouncement(scrollY < ANNOUNCEMENT_HIDE_SCROLL);
     };

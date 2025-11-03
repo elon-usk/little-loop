@@ -14,32 +14,32 @@ export default function Home() {
         id: "story-kit",
         name: "Storytelling Kit",
         price: "69 RON",
-        description: "Carduri ilustrate și ghiduri pentru a inventa povești împreună."
+        description: "Carduri ilustrate și ghiduri pentru a inventa povești împreună.",
       },
       {
         id: "art-pack",
         name: "Art Pack Mini",
         price: "54 RON",
-        description: "Set creativ cu stickere, hârtie texturată și idei de colaje."
+        description: "Set creativ cu stickere, hârtie texturată și idei de colaje.",
       },
       {
         id: "city-pass",
         name: "City Explorer Pass",
         price: "129 RON",
-        description: "Acces la cinci spații culturale family-friendly din București."
+        description: "Acces la cinci spații culturale family-friendly din București.",
       },
       {
         id: "playbox",
         name: "Playbox STEM",
         price: "115 RON",
-        description: "Experimente simple de știință pentru copii curioși între 6-10 ani."
+        description: "Experimente simple de știință pentru copii curioși între 6-10 ani.",
       },
       {
         id: "printables",
         name: "Printables Bundle",
         price: "39 RON",
-        description: "Fișe de activități, planuri de weekend și checklist-uri tematice."
-      }
+        description: "Fișe de activități, planuri de weekend și checklist-uri tematice.",
+      },
     ],
     []
   );
@@ -60,7 +60,10 @@ export default function Home() {
       const sectionHeight = heroEl.offsetHeight || 1;
       const heroTop = heroEl.offsetTop;
       const scrollPos = window.scrollY;
-      const progress = Math.min(Math.max((scrollPos - heroTop) / (sectionHeight * 0.6), 0), 1);
+      const progress = Math.min(
+        Math.max((scrollPos - heroTop) / (sectionHeight * 0.6), 0),
+        1
+      );
       setBgOffset((prev) => (Math.abs(prev - progress) > 0.002 ? progress : prev));
     };
 
@@ -89,7 +92,10 @@ export default function Home() {
     const img = new Image();
     img.src = heroImage;
     const handleLoad = () => {
-      imageMetaRef.current = { width: img.naturalWidth || 1, height: img.naturalHeight || 1 };
+      imageMetaRef.current = {
+        width: img.naturalWidth || 1,
+        height: img.naturalHeight || 1,
+      };
       calculateHeight();
     };
     if (img.complete) {
@@ -122,7 +128,7 @@ export default function Home() {
         style={{
           backgroundImage: `linear-gradient(135deg, rgba(188, 231, 253, 0.35), rgba(247, 240, 109, 0.25)), url(${heroImage})`,
           backgroundPosition: `center ${bgOffset * 120}%`,
-          height: heroHeight ? `${heroHeight}px` : "100vh"
+          height: heroHeight ? `${heroHeight}px` : "100vh",
         }}
       >
         <div className="hero-overlay" role="region" aria-label="Asistent LittleLoop AI">
@@ -145,7 +151,9 @@ export default function Home() {
                 Trimite
               </button>
             </form>
-            <p className="hero-helper">Sunt aici pentru tine și pentru cei mici, curaj!</p>
+            <p className="hero-helper">
+              Sunt aici pentru tine și pentru cei mici, curaj!
+            </p>
           </div>
         </div>
       </header>
@@ -155,9 +163,9 @@ export default function Home() {
           <div className="map-copy">
             <h2 id="map-title">Plimbă-te prin Bucureștiul creativ</h2>
             <p>
-              Harta noastră interactivă te poartă prin ateliere, galerii și spații prietenoase cu
-              copiii. Dă scroll până aici, explorează zona și găsește un nou loc de descoperit
-              weekendul acesta.
+              Harta noastră interactivă te poartă prin ateliere, galerii și spații
+              prietenoase cu copiii. Dă scroll până aici, explorează zona și găsește un
+              nou loc de descoperit weekendul acesta.
             </p>
           </div>
           <InteractiveMap />
@@ -170,8 +178,9 @@ export default function Home() {
             <span className="shop-tag">Nou</span>
             <h2 id="shop-title">Magazinul LittleLoop</h2>
             <p>
-              Resurse digitale și kituri pregătite să transforme timpul petrecut împreună în
-              amintiri creative. Alege ce vi se potrivește și hai să construim lucruri frumoase.
+              Resurse digitale și kituri pregătite să transforme timpul petrecut împreună
+              în amintiri creative. Alege ce vi se potrivește și hai să construim lucruri
+              frumoase.
             </p>
           </div>
           <div className="shop-grid">
