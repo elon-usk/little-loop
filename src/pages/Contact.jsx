@@ -9,10 +9,21 @@ export default function Contact() {
           <p>Email: contact@exemplu.ro</p>
           <p>Telefon: +40 21 000 0000</p>
           <p>
-            Social: <a className="link" href="#">Instagram</a> · <a className="link" href="#">Facebook</a>
+            Social:{" "}
+            <a className="link" href="#">
+              Instagram
+            </a>{" "}
+            ·{" "}
+            <a className="link" href="#">
+              Facebook
+            </a>
           </p>
         </div>
-        <form className="form" onSubmit={(e) => e.preventDefault()} aria-label="Formular de contact">
+        <form
+          className="form"
+          onSubmit={(e) => e.preventDefault()}
+          aria-label="Formular de contact"
+        >
           <label>
             <span>Nume</span>
             <input type="text" placeholder="Numele tău" required />
@@ -25,7 +36,9 @@ export default function Contact() {
             <span>Mesaj</span>
             <textarea rows="4" placeholder="Scrie mesajul aici" required />
           </label>
-          <button className="cta" type="submit">Trimite</button>
+          <button className="cta" type="submit">
+            Trimite
+          </button>
         </form>
       </div>
     </main>

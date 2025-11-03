@@ -5,8 +5,8 @@ export default function Mission() {
     <main id="main" className="section container">
       <h2>Misiunea noastră</h2>
       <p>
-        Încurajăm gândirea critică, dialogul deschis și susținem business-uri din comunitate
-        cu impact pozitiv. Ne dorim familii conectate, informate și inspirate.
+        Încurajăm gândirea critică, dialogul deschis și susținem business-uri din
+        comunitate cu impact pozitiv. Ne dorim familii conectate, informate și inspirate.
       </p>
       <ul className="bullets">
         <li>Programe pentru starea de bine a familiei</li>

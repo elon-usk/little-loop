@@ -6,8 +6,9 @@ export default function About() {
       <h2>Despre noi</h2>
       <div className="about">
         <p>
-          Suntem un spațiu independent dedicat experimentului și educației în arta contemporană. 
-          Lucrăm cu artiști locali și internaționali pentru a crea contexte de întâlnire între public și practici emergente.
+          Suntem un spațiu independent dedicat experimentului și educației în arta
+          contemporană. Lucrăm cu artiști locali și internaționali pentru a crea contexte
+          de întâlnire între public și practici emergente.
         </p>
         <ul className="bullets">
           <li>Program public accesibil și incluziv</li>

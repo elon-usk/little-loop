@@ -20,7 +20,7 @@
     {
       "id": "background",
       "type": "background",
-      "paint": {"background-color": "#FFF9E8"}
+      "paint": { "background-color": "#FFF9E8" }
     },
     {
       "id": "landuse_residential",
@@ -30,7 +30,11 @@
       "filter": ["in", "class", "residential", "suburb", "neighbourhood"],
       "paint": {
         "fill-color": {
-          "stops": [[6, "#FDE0B4"], [12, "#FCE6C9"], [16, "#FFF1E1"]]
+          "stops": [
+            [6, "#FDE0B4"],
+            [12, "#FCE6C9"],
+            [16, "#FFF1E1"]
+          ]
         },
         "fill-opacity": 0.85
       }
@@ -43,7 +47,11 @@
       "filter": ["in", "class", "grass", "park", "meadow"],
       "paint": {
         "fill-color": {
-          "stops": [[6, "#B8E986"], [12, "#A2DE6C"], [16, "#8ED665"]]
+          "stops": [
+            [6, "#B8E986"],
+            [12, "#A2DE6C"],
+            [16, "#8ED665"]
+          ]
         },
         "fill-opacity": 0.95,
         "fill-outline-color": "#7EC957"
@@ -55,7 +63,7 @@
       "source": "openmaptiles",
       "source-layer": "landcover",
       "filter": ["==", "class", "wood"],
-      "paint": {"fill-color": "#A8DCA0", "fill-opacity": 0.9}
+      "paint": { "fill-color": "#A8DCA0", "fill-opacity": 0.9 }
     },
     {
       "id": "landcover_sand",
@@ -63,7 +71,7 @@
       "source": "openmaptiles",
       "source-layer": "landcover",
       "filter": ["in", "class", "sand"],
-      "paint": {"fill-color": "#FFE066", "fill-opacity": 0.6}
+      "paint": { "fill-color": "#FFE066", "fill-opacity": 0.6 }
     },
     {
       "id": "water",
@@ -72,7 +80,11 @@
       "source-layer": "water",
       "paint": {
         "fill-color": {
-          "stops": [[6, "#ADE2F5"], [12, "#84CDE6"], [16, "#5EB4D4"]]
+          "stops": [
+            [6, "#ADE2F5"],
+            [12, "#84CDE6"],
+            [16, "#5EB4D4"]
+          ]
         },
         "fill-opacity": 0.95,
         "fill-outline-color": "#78C3DC"
@@ -86,7 +98,14 @@
       "filter": ["in", "class", "residential", "service", "minor"],
       "paint": {
         "line-color": "#F6D8A9",
-        "line-width": {"base": 1.4, "stops": [[12, 0.4], [16, 2], [20, 10]]},
+        "line-width": {
+          "base": 1.4,
+          "stops": [
+            [12, 0.4],
+            [16, 2],
+            [20, 10]
+          ]
+        },
         "line-dasharray": [3, 1]
       }
     },
@@ -98,7 +117,14 @@
       "filter": ["in", "class", "primary", "secondary", "tertiary", "trunk"],
       "paint": {
         "line-color": "#E9C39B",
-        "line-width": {"base": 1.4, "stops": [[8, 1], [14, 4], [20, 18]]},
+        "line-width": {
+          "base": 1.4,
+          "stops": [
+            [8, 1],
+            [14, 4],
+            [20, 18]
+          ]
+        },
         "line-opacity": 0.9
       }
     },
@@ -111,7 +137,13 @@
       "paint": {
         "line-color": "#C7C2BA",
         "line-dasharray": [3, 2],
-        "line-width": {"base": 1.3, "stops": [[11, 0.5], [18, 2]]},
+        "line-width": {
+          "base": 1.3,
+          "stops": [
+            [11, 0.5],
+            [18, 2]
+          ]
+        },
         "line-opacity": 0.7
       }
     },
@@ -128,7 +160,12 @@
       ],
       "layout": {
         "text-font": ["Comic Sans MS Regular"],
-        "text-size": {"stops": [[6, 10], [12, 14]]},
+        "text-size": {
+          "stops": [
+            [6, 10],
+            [12, 14]
+          ]
+        },
         "text-field": "{name}",
         "text-anchor": "center",
         "text-max-width": 6,
@@ -148,7 +185,12 @@
       "filter": ["==", "class", "city"],
       "layout": {
         "text-font": ["Comic Sans MS Bold"],
-        "text-size": {"stops": [[3, 11], [8, 16]]},
+        "text-size": {
+          "stops": [
+            [3, 11],
+            [8, 16]
+          ]
+        },
         "text-field": "{name}",
         "visibility": "visible"
       },
@@ -166,7 +208,12 @@
       "minzoom": 13,
       "layout": {
         "text-font": ["Comic Sans MS Regular"],
-        "text-size": {"stops": [[10, 8], [20, 14]]},
+        "text-size": {
+          "stops": [
+            [10, 8],
+            [20, 14]
+          ]
+        },
         "text-field": "{name}",
         "symbol-placement": "line",
         "text-letter-spacing": 0.1

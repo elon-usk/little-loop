@@ -6,16 +6,18 @@
   "scripts": {
     "dev": "node ./node_modules/vite/bin/vite.js",
     "build": "node ./node_modules/vite/bin/vite.js build",
-    "preview": "node ./node_modules/vite/bin/vite.js preview"
+    "preview": "node ./node_modules/vite/bin/vite.js preview",
+    "format": "prettier --write \"src/**/*.{js,jsx,json,css}\""
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^4.3.2",
     "maplibre-gl": "^5.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.2",
     "vite": "^5.4.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.56.1"
+    "@playwright/test": "^1.56.1",
+    "prettier": "^3.6.2"
   }
 }

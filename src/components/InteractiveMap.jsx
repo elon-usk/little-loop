@@ -23,7 +23,10 @@ export default function InteractiveMap({ className = "" }) {
       bearing: MAP_BEARING,
     });
 
-    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
+    map.addControl(
+      new maplibregl.NavigationControl({ visualizePitch: true }),
+      "top-right"
+    );
 
     const marker = new maplibregl.Marker({ color: "#E94F37" })
       .setLngLat(MAP_CENTER)
@@ -35,5 +38,11 @@ export default function InteractiveMap({ className = "" }) {
     };
   }, []);
 
-  return <div ref={containerRef} className={`map-frame ${className}`} aria-label="Harta interactiva Bucuresti" />;
+  return (
+    <div
+      ref={containerRef}
+      className={`map-frame ${className}`}
+      aria-label="Harta interactiva Bucuresti"
+    />
+  );
 }
