@@ -113,16 +113,32 @@ img {
   background: transparent;
   border-bottom: var(--header-border) solid transparent;
   box-shadow: none;
-  backdrop-filter: blur(0);
-  -webkit-backdrop-filter: blur(0);
   transition:
     background-color 0.35s ease,
     border-color 0.35s ease,
     box-shadow 0.35s ease,
     color 0.35s ease,
-    top var(--header-transition),
-    backdrop-filter 0.35s ease,
-    -webkit-backdrop-filter 0.35s ease;
+    top var(--header-transition);
+}
+.nav.nav-logo-only {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.nav.nav-logo-only .menu,
+.nav.nav-logo-only .menu-slot-right,
+.nav.nav-logo-only .nav-cta {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
+}
+.nav.nav-logo-only .brand {
+  opacity: 1;
 }
 .nav-with-announcement {
   top: 0.5cm;
@@ -553,28 +569,55 @@ img {
   }
 }
 @media (max-width: 414px) {
+  @keyframes navMobileFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .nav {
     opacity: 1;
     pointer-events: auto;
     transition:
-      opacity 1s ease-in,
-      transform 1s ease-in;
-    transform: translateY(0);
+      opacity 0.8s ease-in,
+      visibility 0.8s ease-in,
+      box-shadow 0.6s ease;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
   }
-  .nav.nav-hidden {
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-    transform: translateY(-24px);
+  .nav.nav-returning {
+    animation: navMobileFadeIn 0.8s ease forwards;
   }
-  .nav.nav-visible {
+  .nav.nav-scrolled {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .nav.nav-logo-only {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
     opacity: 1;
     pointer-events: auto;
-    visibility: visible;
-    transform: translateY(0);
+  }
+  .nav.nav-logo-only .menu,
+  .nav.nav-logo-only .menu-slot-right,
+  .nav.nav-logo-only .nav-cta {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
     transition:
-      opacity 0.28s ease-out,
-      transform 0.28s ease-out;
+      opacity 0.5s ease,
+      visibility 0.5s ease;
+  }
+  .nav.nav-logo-only .brand {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s ease;
   }
   body {
     font-size: 15px;
@@ -625,30 +668,37 @@ img {
     min-height: 150px;
     justify-content: center;
     margin: 12px auto 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
   .hero-overlay h1 {
     font-size: clamp(0.95rem, 3.2vw, 1.1rem);
     line-height: 1.08;
   }
   .hero-chat {
-    padding: 6px 10px;
-    border-radius: 14px;
+    padding: 2px 4px;
+    border-radius: 10px;
     flex-direction: row;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     width: 100%;
+    min-height: 36px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(78, 70, 243, 0.2);
   }
   .hero-chat-input {
-    font-size: 0.78rem;
-    padding: 6px 6px;
+    font-size: 0.66rem;
+    padding: 2px 4px;
     min-width: 0;
+    min-height: 28px;
   }
   .hero-chat-send {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-    border-radius: 12px;
+    font-size: 0.65rem;
+    padding: 4px 8px;
+    border-radius: 10px;
     width: auto;
-    min-width: 86px;
+    min-width: 66px;
+    min-height: 28px;
     flex-shrink: 0;
   }
   .hero-helper {
@@ -969,9 +1019,4 @@ img {
 .link {
   color: #f05a1e;
   font-weight: 600;
-}
-
-.nav.nav-visible {
-  opacity: 1;
-  pointer-events: auto;
 }
