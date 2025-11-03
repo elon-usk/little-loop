@@ -127,7 +127,8 @@ export default function Home() {
         className="hero"
         style={{
           backgroundImage: `linear-gradient(135deg, rgba(188, 231, 253, 0.35), rgba(247, 240, 109, 0.25)), url(${heroImage})`,
-          backgroundPosition: `center ${bgOffset * 120}%`,
+          backgroundPosition: `center ${bgOffset * 120}%, var(--hero-bg-x, center) ${bgOffset * 120}%`,
+          backgroundSize: `cover, var(--hero-bg-size, cover)`,
           height: heroHeight ? `${heroHeight}px` : "100vh",
         }}
       >

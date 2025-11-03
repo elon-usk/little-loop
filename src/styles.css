@@ -1,4 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Borel&family=Parkinsans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Borel&family=Parkinsans:wght@400;600;700&display=swap");
 
 :root {
   /* LittleLoop palette */
@@ -368,9 +368,12 @@ img {
 }
 .hero {
   position: relative;
+  --hero-bg-x: center;
+  --hero-bg-size: cover;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  --hero-bg-x: center;
   min-height: 100vh;
   padding: clamp(120px, 25vh, 240px) 0 clamp(96px, 16vh, 160px);
   background-size: cover;
@@ -550,6 +553,29 @@ img {
   }
 }
 @media (max-width: 414px) {
+  .nav {
+    opacity: 1;
+    pointer-events: auto;
+    transition:
+      opacity 1s ease-in,
+      transform 1s ease-in;
+    transform: translateY(0);
+  }
+  .nav.nav-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transform: translateY(-24px);
+  }
+  .nav.nav-visible {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translateY(0);
+    transition:
+      opacity 0.28s ease-out,
+      transform 0.28s ease-out;
+  }
   body {
     font-size: 15px;
   }
@@ -580,6 +606,8 @@ img {
   .hero {
     min-height: 80vh;
     padding: 48px 0 36px;
+    --hero-bg-x: calc(50% + 1cm);
+    align-items: flex-start;
   }
   .hero-overlay {
     gap: 8px;
@@ -596,6 +624,7 @@ img {
     max-height: 210px;
     min-height: 150px;
     justify-content: center;
+    margin: 12px auto 0;
   }
   .hero-overlay h1 {
     font-size: clamp(0.95rem, 3.2vw, 1.1rem);
@@ -940,4 +969,9 @@ img {
 .link {
   color: #f05a1e;
   font-weight: 600;
+}
+
+.nav.nav-visible {
+  opacity: 1;
+  pointer-events: auto;
 }
