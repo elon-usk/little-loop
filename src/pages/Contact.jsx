@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 export default function Contact() {
   return (
@@ -13,7 +13,7 @@ export default function Contact() {
             <a className="link" href="#">
               Instagram
             </a>{" "}
-            ·{" "}
+            și{" "}
             <a className="link" href="#">
               Facebook
             </a>

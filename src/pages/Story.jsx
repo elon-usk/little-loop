@@ -1,12 +1,12 @@
-﻿import React from "react";
+import React from "react";
 
 export default function Story() {
   return (
     <main id="main" className="section container">
-      <h2>Povestea Littlelopp</h2>
+      <h2>Povestea LittleLoop</h2>
       <p>
-        Littlelopp.ro s-a născut din dorința de a fi alături de părinți – în special mame
-        – cu ghiduri de activități, recomandări, sfaturi practice, idei de sustenabilitate
+        LittleLoop.ro s-a născut din dorința de a fi alături de părinți, în special mame,
+        cu ghiduri de activități, recomandări, sfaturi practice, idei de sustenabilitate
         și sprijin real pentru afacerile locale.
       </p>
       <ul className="bullets">

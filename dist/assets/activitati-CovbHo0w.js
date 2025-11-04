@@ -1,1 +1,0 @@
-import{a as e,j as t,R as o,N as r,F as s}from"./styles-D2Se9I02.js";import{A as a}from"./Activities-C-l-9xJ2.js";e.createRoot(document.getElementById("root")).render(t.jsxs(o.StrictMode,{children:[t.jsx(r,{brand:"littleloop.ro"}),t.jsx(a,{}),t.jsx(s,{})]}));

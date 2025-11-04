@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 export default function Footer() {
   return (
@@ -7,7 +7,7 @@ export default function Footer() {
         <div>
           <div className="brand">littleloop.ro</div>
           <p className="muted">
-            © {new Date().getFullYear()} Toate drepturile rezervate.
+            &copy; {new Date().getFullYear()} Toate drepturile rezervate.
           </p>
         </div>
         <div className="muted">

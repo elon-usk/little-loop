@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import logoImage from "../assets/logo2.png";
 
 const ANNOUNCEMENT_HIDE_SCROLL = 140;
@@ -6,11 +6,11 @@ const HERO_OFFSET_BUFFER = 120;
 const HERO_MIN_THRESHOLD = 140;
 
 const navLinks = [
-  { label: "Acasa", href: "/", match: "/" },
+  { label: "Acasă", href: "/", match: "/" },
   { label: "Povestea", href: "/poveste.html", match: "/poveste" },
   { label: "Misiunea", href: "/misiune.html", match: "/misiune" },
   { label: "Blog", href: "/blog.html", match: "/blog" },
-  { label: "Activitati", href: "/activitati.html", match: "/activitati" },
+  { label: "Activități", href: "/activitati.html", match: "/activitati" },
   { label: "Resurse", href: "/resurse.html", match: "/resurse" },
   { label: "Comunitatea", href: "/comunitate.html", match: "/comunitate" },
   { label: "Contact", href: "/contact.html", match: "/contact" },
@@ -161,17 +161,17 @@ export default function Nav({ brand = "littleloop.ro" }) {
   return (
     <>
       <a className="skip" href="#main">
-        Sari la continut
+        Sari la conținut
       </a>
       <div
         className={`announcement-bar${showAnnouncement ? " is-visible" : ""}`}
         role="region"
-        aria-label="Invitatie grup Skool"
+        aria-label="Invitație grup Skool"
         aria-hidden={!showAnnouncement}
       >
-        Inscrie-te in grupul nostru de Skool.
+        Înscrie-te în grupul nostru de Skool.
       </div>
-      <nav className={navClassNames.join(" ")} aria-label="Navigatie principala">
+      <nav className={navClassNames.join(" ")} aria-label="Navigație principală">
         <div className="container nav-inner">
           <div className="menu menu-left" role="menubar">
             {leftLinks.map((link) => {
