@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import InteractiveMap from "../components/InteractiveMap.jsx";
 import heroImage from "../assets/herowall1.png";
 
@@ -12,33 +12,38 @@ export default function Home() {
     () => [
       {
         id: "story-kit",
-        name: "Storytelling Kit",
+        name: "Kit de Povestit",
         price: "69 RON",
-        description: "Carduri ilustrate și ghiduri pentru a inventa povești împreună.",
+        description:
+          "Carduri ilustrate și ghiduri pentru a inventa povești împreună.",
       },
       {
         id: "art-pack",
-        name: "Art Pack Mini",
+        name: "Pachet Artistic Mini",
         price: "54 RON",
-        description: "Set creativ cu stickere, hârtie texturată și idei de colaje.",
+        description:
+          "Set creativ cu stickere, hârtie texturată și idei de colaje.",
       },
       {
         id: "city-pass",
-        name: "City Explorer Pass",
+        name: "Abonament Explorator Urban",
         price: "129 RON",
-        description: "Acces la cinci spații culturale family-friendly din București.",
+        description:
+          "Acces la cinci spații culturale family-friendly din București.",
       },
       {
         id: "playbox",
-        name: "Playbox STEM",
+        name: "Cutia STEM Playbox",
         price: "115 RON",
-        description: "Experimente simple de știință pentru copii curioși între 6-10 ani.",
+        description:
+          "Experimente simple de știință pentru copii curioși între 6-10 ani.",
       },
       {
         id: "printables",
-        name: "Printables Bundle",
+        name: "Pachet Printabile",
         price: "39 RON",
-        description: "Fișe de activități, planuri de weekend și checklist-uri tematice.",
+        description:
+          "Fișe de activități, planuri de weekend și checklist-uri tematice.",
       },
     ],
     []
@@ -161,9 +166,9 @@ export default function Home() {
           <div className="map-copy">
             <h2 id="map-title">Plimbă-te prin Bucureștiul creativ</h2>
             <p>
-              Harta noastră interactivă te poartă prin ateliere, galerii și spații
-              prietenoase cu copiii. Dă scroll până aici, explorează zona și găsește un
-              nou loc de descoperit weekendul acesta.
+              Harta noastră interactivă te poartă prin ateliere, galerii și
+              spații prietenoase cu copiii. Dă scroll până aici, explorează
+              zona și găsește un nou loc de descoperit în weekendul acesta.
             </p>
           </div>
           <InteractiveMap />
@@ -176,9 +181,9 @@ export default function Home() {
             <span className="shop-tag">Nou</span>
             <h2 id="shop-title">Magazinul LittleLoop</h2>
             <p>
-              Resurse digitale și kituri pregătite să transforme timpul petrecut împreună
-              în amintiri creative. Alege ce vi se potrivește și hai să construim lucruri
-              frumoase.
+              Resurse digitale și kituri pregătite să transforme timpul petrecut
+              împreună în amintiri creative. Alege ce vi se potrivește și hai să
+              construim lucruri frumoase.
             </p>
           </div>
           <div className="shop-grid">

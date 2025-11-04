@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <div>
-      <Nav brand="littlelopp.ro" />
+      <Nav brand="littleloop.ro" />
       {match.el}
       <Footer />
     </div>

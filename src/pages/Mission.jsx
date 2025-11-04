@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 export default function Mission() {
   return (
@@ -9,9 +9,9 @@ export default function Mission() {
         comunitate cu impact pozitiv. Ne dorim familii conectate, informate și inspirate.
       </p>
       <ul className="bullets">
-        <li>Programe pentru starea de bine a familiei</li>
-        <li>Educație prin joc și creativitate</li>
-        <li>Resurse curate, prietenoase și utile</li>
+        <li>Programe pentru starea de bine a familiei.</li>
+        <li>Educație prin joc și creativitate.</li>
+        <li>Resurse curate, prietenoase și utile.</li>
       </ul>
     </main>
   );
