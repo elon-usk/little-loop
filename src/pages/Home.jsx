@@ -1,12 +1,23 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import InteractiveMap from "../components/InteractiveMap.jsx";
 import heroImage from "../assets/herowall1.png";
+import { askLittleLoopAI } from "../lib/aiClient.js";
 
 export default function Home() {
   const heroRef = useRef(null);
   const [bgOffset, setBgOffset] = useState(0);
   const [heroHeight, setHeroHeight] = useState(null);
   const imageMetaRef = useRef({ width: 0, height: 0 });
+  const [chatInput, setChatInput] = useState("");
+  const [chatMessages, setChatMessages] = useState([
+    {
+      role: "assistant",
+      content:
+        "Salut! Sunt LittleLoop AI. Îți pot sugera activități creative pentru părinți și copii în București sau idei pentru acasă. Despre ce vrei să vorbim azi?",
+    },
+  ]);
+  const [isChatLoading, setIsChatLoading] = useState(false);
+  const [chatError, setChatError] = useState("");
 
   const heroCtaText = "Împreună, desenăm amintiri";
 
@@ -125,9 +136,38 @@ export default function Home() {
     return () => window.removeEventListener("resize", calculateHeight);
   }, [calculateHeight]);
 
-  const handleHeroChatSubmit = useCallback((event) => {
-    event.preventDefault();
-  }, []);
+  const handleHeroChatSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+      const trimmed = chatInput.trim();
+      if (!trimmed || isChatLoading) return;
+
+      const userMessage = { role: "user", content: trimmed };
+      const historyBeforeSend = chatMessages;
+
+      setChatMessages((prev) => [...prev, userMessage]);
+      setChatInput("");
+      setChatError("");
+      setIsChatLoading(true);
+
+      try {
+        const aiReply = await askLittleLoopAI({
+          input: trimmed,
+          history: historyBeforeSend,
+        });
+        setChatMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: aiReply },
+        ]);
+      } catch (error) {
+        console.error(error);
+        setChatError(error.message);
+      } finally {
+        setIsChatLoading(false);
+      }
+    },
+    [chatInput, chatMessages, isChatLoading]
+  );
 
   return (
     <>
@@ -155,15 +195,40 @@ export default function Home() {
 
           <div className="hero-overlay-body">
             <h1>{heroCtaText}</h1>
+            <div className="hero-chat-log" aria-live="polite">
+              {chatMessages.map((message, index) => (
+                <div
+                  key={`${message.role}-${index}`}
+                  className={`hero-chat-bubble hero-chat-bubble--${message.role}`}
+                >
+                  <span className="hero-chat-author">
+                    {message.role === "user" ? "Tu" : "LL"}
+                  </span>
+                  <p>{message.content}</p>
+                </div>
+              ))}
+              {isChatLoading && (
+                <div className="hero-chat-bubble hero-chat-bubble--assistant hero-chat-bubble--pending">
+                  <span className="hero-chat-author">LL</span>
+                  <p>Scriu un răspuns...</p>
+                </div>
+              )}
+            </div>
+
+            {chatError && <p className="hero-chat-error">{chatError}</p>}
+
             <form className="hero-chat" onSubmit={handleHeroChatSubmit}>
               <input
                 className="hero-chat-input"
                 type="text"
                 placeholder="Astăzi vrem să... râdem"
                 aria-label="Mesaj către LittleLoop AI"
+                value={chatInput}
+                onChange={(event) => setChatInput(event.target.value)}
+                disabled={isChatLoading}
               />
-              <button className="hero-chat-send" type="submit">
-                Trimite
+              <button className="hero-chat-send" type="submit" disabled={isChatLoading}>
+                {isChatLoading ? "..." : "Trimite"}
               </button>
             </form>
           </div>
