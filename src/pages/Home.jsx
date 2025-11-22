@@ -186,15 +186,7 @@ export default function Home() {
         }}
       >
         <div className="hero-overlay" role="region" aria-label="Asistent LittleLoop AI">
-          <div className="hero-overlay-header">
-            <span className="hero-signal" aria-hidden="true" />
-            <span className="hero-signal" aria-hidden="true" />
-            <span className="hero-signal" aria-hidden="true" />
-            <span className="hero-overlay-id">LL - AI Console</span>
-          </div>
-
           <div className="hero-overlay-body">
-            <h1>{heroCtaText}</h1>
             <div className="hero-chat-log" aria-live="polite">
               {chatMessages.map((message, index) => (
                 <div
