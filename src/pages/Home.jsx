@@ -7,7 +7,9 @@ export default function Home() {
   const [bgOffset, setBgOffset] = useState(0);
   const [heroHeight, setHeroHeight] = useState(null);
   const imageMetaRef = useRef({ width: 0, height: 0 });
+
   const heroCtaText = "Împreună, desenăm amintiri";
+
   const shopItems = useMemo(
     () => [
       {
@@ -53,22 +55,27 @@ export default function Home() {
     const heroEl = heroRef.current;
     const { width, height } = imageMetaRef.current;
     if (!heroEl || !width) return;
+
     const heroWidth = heroEl.offsetWidth || window.innerWidth;
     const computedHeight = heroWidth * (height / width);
     setHeroHeight(computedHeight);
   }, []);
 
+  // Scroll-based parallax for hero background
   useEffect(() => {
     const updateOffset = () => {
       const heroEl = heroRef.current;
       if (!heroEl) return;
+
       const sectionHeight = heroEl.offsetHeight || 1;
       const heroTop = heroEl.offsetTop;
       const scrollPos = window.scrollY;
+
       const progress = Math.min(
         Math.max((scrollPos - heroTop) / (sectionHeight * 0.6), 0),
         1
       );
+
       setBgOffset((prev) => (Math.abs(prev - progress) > 0.002 ? progress : prev));
     };
 
@@ -84,18 +91,19 @@ export default function Home() {
     updateOffset();
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", scheduleUpdate);
+
     return () => {
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-      }
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
+  // Load hero image and compute height
   useEffect(() => {
     const img = new Image();
     img.src = heroImage;
+
     const handleLoad = () => {
       imageMetaRef.current = {
         width: img.naturalWidth || 1,
@@ -103,22 +111,18 @@ export default function Home() {
       };
       calculateHeight();
     };
-    if (img.complete) {
-      handleLoad();
-    } else {
-      img.addEventListener("load", handleLoad);
-    }
-    return () => {
-      img.removeEventListener("load", handleLoad);
-    };
+
+    if (img.complete) handleLoad();
+    else img.addEventListener("load", handleLoad);
+
+    return () => img.removeEventListener("load", handleLoad);
   }, [calculateHeight]);
 
+  // Recalculate hero height on resize
   useEffect(() => {
     calculateHeight();
     window.addEventListener("resize", calculateHeight);
-    return () => {
-      window.removeEventListener("resize", calculateHeight);
-    };
+    return () => window.removeEventListener("resize", calculateHeight);
   }, [calculateHeight]);
 
   const handleHeroChatSubmit = useCallback((event) => {
@@ -126,14 +130,18 @@ export default function Home() {
   }, []);
 
   return (
-    <main id="main">
+    <>
+      {/* HERO SECTION */}
       <header
         ref={heroRef}
         className="hero"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(188, 231, 253, 0.35), rgba(247, 240, 109, 0.25)), url(${heroImage})`,
-          backgroundPosition: `center ${bgOffset * 120}%, var(--hero-bg-x, center) ${bgOffset * 120}%`,
-          backgroundSize: `cover, var(--hero-bg-size, cover)`,
+          backgroundImage: `
+            linear-gradient(135deg, rgba(188, 231, 253, 0.35), rgba(247, 240, 109, 0.25)),
+            url(${heroImage})
+          `,
+          backgroundPosition: `center ${bgOffset * 120}%`,
+          backgroundSize: `cover`,
           height: heroHeight ? `${heroHeight}px` : "100vh",
         }}
       >
@@ -144,6 +152,7 @@ export default function Home() {
             <span className="hero-signal" aria-hidden="true" />
             <span className="hero-overlay-id">LL - AI Console</span>
           </div>
+
           <div className="hero-overlay-body">
             <h1>{heroCtaText}</h1>
             <form className="hero-chat" onSubmit={handleHeroChatSubmit}>
@@ -161,20 +170,24 @@ export default function Home() {
         </div>
       </header>
 
+      {/* MAP SECTION */}
       <section className="section map-section" aria-labelledby="map-title">
         <div className="container map-section-inner">
           <div className="map-copy">
             <h2 id="map-title">Plimbă-te prin Bucureștiul creativ</h2>
             <p>
               Harta noastră interactivă te poartă prin ateliere, galerii și
-              spații prietenoase cu copiii. Dă scroll până aici, explorează
-              zona și găsește un nou loc de descoperit în weekendul acesta.
+              spații prietenoase cu copiii. Dă scroll până aici, explorează zona
+              și găsește un nou loc de descoperit în weekendul acesta.
             </p>
           </div>
+
+          {/* MAP */}
           <InteractiveMap />
         </div>
       </section>
 
+      {/* SHOP SECTION */}
       <section className="section shop-section" aria-labelledby="shop-title">
         <div className="container">
           <div className="shop-intro">
@@ -182,10 +195,11 @@ export default function Home() {
             <h2 id="shop-title">Magazinul LittleLoop</h2>
             <p>
               Resurse digitale și kituri pregătite să transforme timpul petrecut
-              împreună în amintiri creative. Alege ce vi se potrivește și hai să
-              construim lucruri frumoase.
+              împreună în amintiri creative. Alege ce vi se potrivește și hai
+              să construim lucruri frumoase.
             </p>
           </div>
+
           <div className="shop-grid">
             {shopItems.map((item) => (
               <article key={item.id} className="shop-card">
@@ -205,6 +219,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }

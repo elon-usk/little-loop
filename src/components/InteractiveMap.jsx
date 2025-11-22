@@ -1,8 +1,13 @@
 import React from "react";
 import maplibregl from "maplibre-gl";
+import MapLibreWorker from "maplibre-gl/dist/maplibre-gl-csp-worker.js?worker";
+import { PMTiles, Protocol } from "pmtiles";
+
+maplibregl.workerClass = MapLibreWorker;
 import "maplibre-gl/dist/maplibre-gl.css";
 import mapStyle from "../data/bucharest4map.json";
 
+const PMTILES_URL = "/tiles/europe_romania.pmtiles";
 const MAP_CENTER = mapStyle.center ?? [26.1025, 44.4268];
 const MAP_ZOOM = mapStyle.zoom ?? 12.2;
 const MAP_PITCH = typeof mapStyle.pitch === "number" ? mapStyle.pitch : undefined;
@@ -13,6 +18,11 @@ export default function InteractiveMap({ className = "" }) {
 
   React.useEffect(() => {
     if (!containerRef.current) return;
+
+    const protocol = new Protocol();
+    const pmtiles = new PMTiles(PMTILES_URL);
+    protocol.add(pmtiles);
+    maplibregl.addProtocol("pmtiles", protocol.tile);
 
     const map = new maplibregl.Map({
       container: containerRef.current,
@@ -32,9 +42,15 @@ export default function InteractiveMap({ className = "" }) {
       .setLngLat(MAP_CENTER)
       .addTo(map);
 
+    // 🟩 IMPORTANT FIX: Force resize after mount
+    setTimeout(() => {
+      map.resize();
+    }, 200);
+
     return () => {
       marker.remove();
       map.remove();
+      maplibregl.removeProtocol("pmtiles");
     };
   }, []);
 
@@ -42,7 +58,8 @@ export default function InteractiveMap({ className = "" }) {
     <div
       ref={containerRef}
       className={`map-frame ${className}`}
-      aria-label="Harta interactiva Bucuresti"
+      style={{ width: "100%", height: "500px" }} // 🔥 ensure visible size
+      aria-label="Harta interactivă București"
     />
   );
 }

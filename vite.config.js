@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import mdx from "@mdx-js/rollup";
 import { fileURLToPath } from "node:url";
 
 const input = {
@@ -13,7 +14,10 @@ const input = {
 };
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    mdx(),     // 👉 MDX loader (must come BEFORE react())
+    react()
+  ],
   build: {
     rollupOptions: {
       input,

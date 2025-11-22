@@ -12,17 +12,13 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=xwK5OblkSp4XIE9pfl4l"
+      "url": "pmtiles:///tiles/europe_romania.pmtiles"
     }
   },
   "sprite": "https://openmaptiles.github.io/positron-gl-style/sprite",
   "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=xwK5OblkSp4XIE9pfl4l",
   "layers": [
-    {
-      "id": "background",
-      "type": "background",
-      "paint": { "background-color": "rgb(242,243,240)" }
-    },
+
     {
       "id": "park",
       "type": "fill",
