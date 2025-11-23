@@ -1,10 +1,19 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import InteractiveMap from "../components/InteractiveMap.jsx";
 import heroImage from "../assets/herowall1.png";
+import aiLogo from "../assets/ailogo3.png";
 import { askLittleLoopAI } from "../lib/aiClient.js";
 
 export default function Home() {
   const heroRef = useRef(null);
+  const chatLogRef = useRef(null);
+  const messageRefs = useRef({});
   const [bgOffset, setBgOffset] = useState(0);
   const [heroHeight, setHeroHeight] = useState(null);
   const imageMetaRef = useRef({ width: 0, height: 0 });
@@ -16,6 +25,7 @@ export default function Home() {
         "Salut! Sunt LittleLoop AI. Îți pot sugera activități creative pentru părinți și copii în București sau idei pentru acasă. Despre ce vrei să vorbim azi?",
     },
   ]);
+  const [hasExpandedChat, setHasExpandedChat] = useState(false);
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [chatError, setChatError] = useState("");
 
@@ -146,6 +156,9 @@ export default function Home() {
       const historyBeforeSend = chatMessages;
 
       setChatMessages((prev) => [...prev, userMessage]);
+      if (!hasExpandedChat) {
+        setHasExpandedChat(true);
+      }
       setChatInput("");
       setChatError("");
       setIsChatLoading(true);
@@ -169,6 +182,24 @@ export default function Home() {
     [chatInput, chatMessages, isChatLoading]
   );
 
+  useEffect(() => {
+    const container = chatLogRef.current;
+    if (!container || chatMessages.length === 0) return;
+    const lastMessage = chatMessages[chatMessages.length - 1];
+
+    if (lastMessage.role === "user") {
+      container.scrollTop = container.scrollHeight;
+      return;
+    }
+
+    const lastKey = `assistant-${chatMessages.length - 1}`;
+    const target = messageRefs.current[lastKey];
+    if (target) {
+      const offset = target.offsetTop - container.offsetTop;
+      container.scrollTop = offset;
+    }
+  }, [chatMessages]);
+
   return (
     <>
       {/* HERO SECTION */}
@@ -185,23 +216,59 @@ export default function Home() {
           height: heroHeight ? `${heroHeight}px` : "100vh",
         }}
       >
-        <div className="hero-overlay" role="region" aria-label="Asistent LittleLoop AI">
-          <div className="hero-overlay-body">
-            <div className="hero-chat-log" aria-live="polite">
-              {chatMessages.map((message, index) => (
-                <div
-                  key={`${message.role}-${index}`}
-                  className={`hero-chat-bubble hero-chat-bubble--${message.role}`}
-                >
-                  <span className="hero-chat-author">
-                    {message.role === "user" ? "Tu" : "LL"}
+        <div
+          className={`hero-overlay ${
+            hasExpandedChat ? "hero-overlay--expanded" : ""
+          }`}
+          role="region"
+          aria-label="Asistent LittleLoop AI"
+        >
+          <div
+            className={`hero-overlay-body ${
+              hasExpandedChat ? "hero-overlay-body--expanded" : ""
+            }`}
+          >
+            <div
+              className="hero-chat-log"
+              aria-live="polite"
+              ref={chatLogRef}
+            >
+              {chatMessages.map((message, index) => {
+                const messageKey = `${message.role}-${index}`;
+                return (
+                  <div
+                    key={messageKey}
+                    ref={(node) => {
+                      if (message.role === "assistant") {
+                        messageRefs.current[messageKey] = node;
+                      }
+                    }}
+                    className={`hero-chat-bubble hero-chat-bubble--${message.role}`}
+                  >
+                    <span className="hero-chat-author">
+                      {message.role === "user" ? (
+                        "Tu"
+                      ) : (
+                        <img
+                        src={aiLogo}
+                        alt="LittleLoop AI"
+                        className="hero-chat-avatar"
+                      />
+                    )}
                   </span>
                   <p>{message.content}</p>
-                </div>
-              ))}
+                  </div>
+                );
+              })}
               {isChatLoading && (
                 <div className="hero-chat-bubble hero-chat-bubble--assistant hero-chat-bubble--pending">
-                  <span className="hero-chat-author">LL</span>
+                  <span className="hero-chat-author">
+                    <img
+                      src={aiLogo}
+                      alt="LittleLoop AI"
+                      className="hero-chat-avatar"
+                    />
+                  </span>
                   <p>Scriu un răspuns...</p>
                 </div>
               )}
