@@ -214,14 +214,16 @@ export default function Nav({ brand = "littleloop.ro" }) {
             </div>
 
             {ctaLink && (
-              <Link
-                to={ctaLink.href}
-                className="nav-link nav-cta"
-                role="menuitem"
-                aria-current={activePath === ctaLink.match ? "page" : undefined}
-              >
-                {ctaLink.label}
-              </Link>
+                <Link
+                  to={ctaLink.href}
+                  className={`nav-link nav-cta ${
+                    activePath === ctaLink.match ? "is-active" : ""
+                  }`}
+                  role="menuitem"
+                  aria-current={activePath === ctaLink.match ? "page" : undefined}
+                >
+                  {ctaLink.label}
+                </Link>
             )}
           </div>
         </div>

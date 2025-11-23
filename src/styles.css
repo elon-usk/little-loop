@@ -319,6 +319,7 @@ img {
 .nav-cta[aria-current="page"] {
   box-shadow: 0 0 0 3px rgba(240, 90, 30, 0.25);
 }
+
 @media (max-width: 768px) {
   .announcement-bar {
     font-size: 0.85rem;

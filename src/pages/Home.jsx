@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import InteractiveMap from "../components/InteractiveMap.jsx";
-import heroImage from "../assets/herowall1.png";
+import heroImage from "../assets/herowall11.png";
 import aiLogo from "../assets/ailogo3.png";
 import { askLittleLoopAI } from "../lib/aiClient.js";
 
