@@ -3,14 +3,15 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "scripts": {
-    "dev": "node ./node_modules/vite/bin/vite.js",
-    "server": "node scripts/server.js",
-    "prebuild": "node scripts/generate-sitemap.js",
-    "build": "node ./node_modules/vite/bin/vite.js build",
-    "preview": "node ./node_modules/vite/bin/vite.js preview",
-    "format": "prettier --write \"src/**/*.{js,jsx,json,css}\""
-  },
+"scripts": {
+  "dev": "vite",
+  "server": "node scripts/server.js",
+  "prebuild": "node scripts/generate-sitemap.js",
+  "build": "vite build",
+  "vercel-build": "vite build",
+  "preview": "vite preview",
+  "format": "prettier --write \"src/**/*.{js,jsx,json,css}\""
+},
   "dependencies": {
     "@mdx-js/react": "^3.1.1",
     "@mdx-js/rollup": "^3.1.1",
