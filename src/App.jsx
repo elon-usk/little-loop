@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 import Nav from "./components/Nav.jsx";
 import Footer from "./components/Footer.jsx";
@@ -18,27 +19,31 @@ import BlogPost from "./components/BlogPost.jsx";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Nav brand="littleloop.ro" />
+    <>
+      {/* Analytics should be at the top level */}
+      <Analytics />
 
-      <main id="main">
-        <Routes>
-          {/* your existing routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/poveste" element={<Story />} />
-          <Route path="/misiune" element={<Mission />} />
-          <Route path="/activitati" element={<Activities />} />
-          <Route path="/resurse" element={<Resources />} />
-          <Route path="/comunitate" element={<Community />} />
-          <Route path="/contact" element={<Contact />} />
+      <BrowserRouter>
+        <Nav brand="littleloop.ro" />
 
-          {/* 👉 Blog routes */}
-          <Route path="/blog" element={<BlogIndex />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-        </Routes>
-      </main>
+        <main id="main">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/poveste" element={<Story />} />
+            <Route path="/misiune" element={<Mission />} />
+            <Route path="/activitati" element={<Activities />} />
+            <Route path="/resurse" element={<Resources />} />
+            <Route path="/comunitate" element={<Community />} />
+            <Route path="/contact" element={<Contact />} />
 
-      <Footer />
-    </BrowserRouter>
+            {/* 👉 Blog routes */}
+            <Route path="/blog" element={<BlogIndex />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 }
