@@ -24,13 +24,13 @@ public/
 - Pagini precum `Story`, `Mission`, `Resources`, `Community`, `Contact` sunt componente independente din `src/pages/`.
 - Blog-ul folosește MDX: fișierele din `src/content/*.mdx` exportă `frontmatter`; `src/utils/getPosts.js` le importă și construiește lista. `BlogIndex.jsx` afișează articolele, iar `BlogPost.jsx` redă conținutul și inserează `CustomCTA`.
 - Hartă: `src/components/InteractiveMap.jsx` creează instanța MapLibre (folosind un stil local JSON sau MapTiler) și adaugă markerul București.
-- Asistent AI: `Home.jsx` păstrează starea conversației, iar `src/lib/aiClient.js` apelează endpoint-ul backend `/api/chat`, care la rândul lui trimite cererea către OpenAI.
+- Asistent AI: `Home.jsx` păstrează starea conversației, iar `src/lib/aiClient.js` apelează endpoint-ul `/api/chat` (funcție serverless sau server Node) care trimite cererea către OpenAI.
 
 ### Arhitectura AI
 
 1. Componentele frontend (React) trimit cereri POST către `/api/chat` cu `{ input, history }`.
-2. Vite face proxy către serverul Node (`scripts/server.js`) în timpul dezvoltării (`npm run dev` ↔ `npm run server`).
-3. Serverul Node normalizează istoricul, inserează `SYSTEM_PROMPT` și apelează **OpenAI Chat Completions** folosind `OPENAI_API_KEY`.
+2. În dezvoltare, poți folosi serverul Express (`scripts/server.js`) sau `vercel dev` care rulează funcția din `api/chat.js`.
+3. Backend-ul normalizează istoricul, inserează `SYSTEM_PROMPT` și apelează **OpenAI Chat Completions** folosind `OPENAI_API_KEY`.
 4. Răspunsul text este returnat către browser. Cheia OpenAI rămâne doar pe backend.
 
 ## Scripturi
@@ -66,7 +66,8 @@ Repornirea fiecărui server este necesară după ce modifici fișierele `.env*`.
 - `BlogIndex.jsx` / `BlogPost.jsx` – listă și redare articole MDX
 - `CustomCTA.jsx` – bloc CTA folosit în articole
 - `aiClient.js` – helper care comunică cu backend-ul `/api/chat`
-- `scripts/server.js` – server Node/Express ce proxiază cererile către OpenAI
+- `api/chat.js` – funcție serverless (Vercel) ce proxiază cererile către OpenAI
+- `scripts/server.js` – server Node/Express folosit pentru dezvoltare locală
 - `Home.jsx` – hero AI, map, shop, logica chatului și parallax-ul
 
 ## Conținut
@@ -74,7 +75,7 @@ Repornirea fiecărui server este necesară după ce modifici fișierele `.env*`.
 - **Pagini**: adaugă componente noi în `src/pages` și conectează-le în `src/entries` sau `App.jsx`.
 - **Blog**: creează fișiere `.mdx` cu `frontmatter` în `src/content`. Vite le importă automat.
 - **Hartă**: actualizează `src/data/bucharest4map.json` sau folosește alt stil MapTiler.
-- **AI**: promptul și modelul sunt definite în backend (`scripts/server.js`); frontend-ul nu mai conține cheia OpenAI.
+- **AI**: promptul și modelul sunt definite în backend (`api/chat.js` sau `scripts/server.js` pentru dev); frontend-ul nu mai conține cheia OpenAI.
 
 ## Cum rulezi local
 
@@ -87,13 +88,13 @@ Repornirea fiecărui server este necesară după ce modifici fișierele `.env*`.
 
 1. Build: `npm run build` (crează `dist/`).
 2. Deploy frontend (`dist/`) pe hosting static (Vercel, Netlify, etc.). Setează `VITE_API_BASE_URL` dacă API-ul este pe alt domeniu.
-3. Deploy backend (`scripts/server.js`) pe un serviciu Node/Serverless, cu `OPENAI_API_KEY` configurat. Asigură-te că expune `/api/chat`.
+3. Deploy backend (`api/chat.js` ca funcție Vercel sau `scripts/server.js` pe un serviciu Node), cu `OPENAI_API_KEY` configurat. Asigură-te că expune `/api/chat`.
 4. Configurează frontend-ul să apeleze backend-ul (prin `VITE_API_BASE_URL` sau printr-un reverse proxy/passthrough oferit de platforma ta).
 
 ## Deploy
 
 1. Rulează `npm run build`.
-2. Deploy pentru frontend (ex. Vercel/Netlify) și deploy pentru API (`npm run server`, găzduit pe server propriu, Fly.io, Render, Vercel Serverless etc.).
+2. Deploy pentru frontend (ex. Vercel/Netlify) și deploy pentru API (funcția `api/chat.js` pe Vercel sau serverul Node pe Fly.io/Render).
 3. Configurează `OPENAI_API_KEY` pentru backend și `VITE_API_BASE_URL` (dacă API-ul este pe alt domeniu) pentru frontend.
 4. Servește folderul `dist/` (Vercel/Netlify identifică automat comanda și output-ul).
 
