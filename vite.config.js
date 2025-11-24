@@ -13,14 +13,25 @@ const input = {
   contact: fileURLToPath(new URL("./contact.html", import.meta.url)),
 };
 
+const API_PROXY_TARGET =
+  process.env.VITE_API_PROXY_TARGET || "http://localhost:8787";
+
 export default defineConfig({
   plugins: [
-    mdx(),     // 👉 MDX loader (must come BEFORE react())
-    react()
+    mdx(), // 👉 MDX loader (must come BEFORE react())
+    react(),
   ],
   build: {
     rollupOptions: {
       input,
+    },
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: API_PROXY_TARGET,
+        changeOrigin: true,
+      },
     },
   },
 });

@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import InteractiveMap from "../components/InteractiveMap.jsx";
+import Seo from "../components/Seo.jsx";
 import heroImage from "../assets/herowall11.png";
 import aiLogo from "../assets/ailogo3.png";
 import { askLittleLoopAI } from "../lib/aiClient.js";
@@ -202,6 +203,11 @@ export default function Home() {
 
   return (
     <>
+      <Seo
+        title="Hub creativ pentru părinți și copii în București"
+        description="Experimentează harta interactivă LittleLoop, recomandările AI și kiturile creative care aduc împreună familiile din București."
+        path="/"
+      />
       {/* HERO SECTION */}
       <header
         ref={heroRef}

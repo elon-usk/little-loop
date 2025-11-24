@@ -24,24 +24,39 @@ public/
 - Pagini precum `Story`, `Mission`, `Resources`, `Community`, `Contact` sunt componente independente din `src/pages/`.
 - Blog-ul folosește MDX: fișierele din `src/content/*.mdx` exportă `frontmatter`; `src/utils/getPosts.js` le importă și construiește lista. `BlogIndex.jsx` afișează articolele, iar `BlogPost.jsx` redă conținutul și inserează `CustomCTA`.
 - Hartă: `src/components/InteractiveMap.jsx` creează instanța MapLibre (folosind un stil local JSON sau MapTiler) și adaugă markerul București.
-- Asistent AI: `Home.jsx` păstrează starea conversației, iar `src/lib/aiClient.js` apelează OpenAI Chat Completions (model implicit `gpt-4o-mini`).
+- Asistent AI: `Home.jsx` păstrează starea conversației, iar `src/lib/aiClient.js` apelează endpoint-ul backend `/api/chat`, care la rândul lui trimite cererea către OpenAI.
+
+### Arhitectura AI
+
+1. Componentele frontend (React) trimit cereri POST către `/api/chat` cu `{ input, history }`.
+2. Vite face proxy către serverul Node (`scripts/server.js`) în timpul dezvoltării (`npm run dev` ↔ `npm run server`).
+3. Serverul Node normalizează istoricul, inserează `SYSTEM_PROMPT` și apelează **OpenAI Chat Completions** folosind `OPENAI_API_KEY`.
+4. Răspunsul text este returnat către browser. Cheia OpenAI rămâne doar pe backend.
 
 ## Scripturi
 
-- `npm run dev` – server de dezvoltare Vite
+- `npm run dev` – server de dezvoltare Vite (frontend)
+- `npm run server` – pornește API-ul Node/Express (rulează pe portul `PORT` sau 8787)
 - `npm run build` – build de producție (`dist/`)
 - `npm run preview` – testează build-ul local
 
 ## Configurare variabile de mediu
 
-Creează `.env.local` (ignorată din Git) și adaugă:
+Frontend și backend folosesc fișiere/env-uri separate (ne-versionate):
 
 ```
-VITE_OPENAI_API_KEY=sk-...
+# .env.local (frontend)
 VITE_MAPTILER_KEY=...
+VITE_API_BASE_URL=/api          # implicit; setează un URL extern dacă API-ul e pe alt domeniu
+
+# .env.server sau variabile pentru API
+OPENAI_API_KEY=sk-...
+PORT=8787                       # opțional
+ALLOWED_ORIGIN=https://littleloop.ro   # opțional, pentru CORS
+OPENAI_MODEL=gpt-4o-mini        # opțional
 ```
 
-Repornirea serverului este necesară după ce modifici `.env.local`.
+Repornirea fiecărui server este necesară după ce modifici fișierele `.env*`.
 
 ## Componente importante
 
@@ -50,7 +65,8 @@ Repornirea serverului este necesară după ce modifici `.env.local`.
 - `InteractiveMap.jsx` – instanță MapLibre + marker
 - `BlogIndex.jsx` / `BlogPost.jsx` – listă și redare articole MDX
 - `CustomCTA.jsx` – bloc CTA folosit în articole
-- `aiClient.js` – helper pentru OpenAI (fetch + sistem prompt)
+- `aiClient.js` – helper care comunică cu backend-ul `/api/chat`
+- `scripts/server.js` – server Node/Express ce proxiază cererile către OpenAI
 - `Home.jsx` – hero AI, map, shop, logica chatului și parallax-ul
 
 ## Conținut
@@ -58,16 +74,31 @@ Repornirea serverului este necesară după ce modifici `.env.local`.
 - **Pagini**: adaugă componente noi în `src/pages` și conectează-le în `src/entries` sau `App.jsx`.
 - **Blog**: creează fișiere `.mdx` cu `frontmatter` în `src/content`. Vite le importă automat.
 - **Hartă**: actualizează `src/data/bucharest4map.json` sau folosește alt stil MapTiler.
-- **AI**: modifică promptul/modelul în `aiClient.js`. Pentru a nu expune cheia, mută apelul într-un endpoint serverless.
+- **AI**: promptul și modelul sunt definite în backend (`scripts/server.js`); frontend-ul nu mai conține cheia OpenAI.
+
+## Cum rulezi local
+
+1. Instalează dependențele: `npm install`.
+2. Creează `.env.local` și `.env.server` conform secțiunii *Configurare variabile de mediu*.
+3. Într-un terminal rulează `npm run server` (backend). În alt terminal rulează `npm run dev` (frontend).
+4. Accesează http://localhost:5173. Chat-ul va accesa `/api/chat`, proxy către http://localhost:8787.
+
+## Cum rulezi în producție
+
+1. Build: `npm run build` (crează `dist/`).
+2. Deploy frontend (`dist/`) pe hosting static (Vercel, Netlify, etc.). Setează `VITE_API_BASE_URL` dacă API-ul este pe alt domeniu.
+3. Deploy backend (`scripts/server.js`) pe un serviciu Node/Serverless, cu `OPENAI_API_KEY` configurat. Asigură-te că expune `/api/chat`.
+4. Configurează frontend-ul să apeleze backend-ul (prin `VITE_API_BASE_URL` sau printr-un reverse proxy/passthrough oferit de platforma ta).
 
 ## Deploy
 
 1. Rulează `npm run build`.
-2. Configurează `VITE_OPENAI_API_KEY` (și `VITE_MAPTILER_KEY` dacă e cazul) în platforma de hosting.
-3. Servește folderul `dist/` (Vercel/Netlify identifică automat comanda și output-ul).
+2. Deploy pentru frontend (ex. Vercel/Netlify) și deploy pentru API (`npm run server`, găzduit pe server propriu, Fly.io, Render, Vercel Serverless etc.).
+3. Configurează `OPENAI_API_KEY` pentru backend și `VITE_API_BASE_URL` (dacă API-ul este pe alt domeniu) pentru frontend.
+4. Servește folderul `dist/` (Vercel/Netlify identifică automat comanda și output-ul).
 
 ## Note
 
 - `.env*` este ignorat – păstrează cheile doar local/în hosting.
 - Dacă folosești PMTiles locale, verifică dimensiunea și caching-ul.
-- Fără proxy serverless, cheia OpenAI din bundle poate fi expusă utilizatorilor.
+- Backend-ul `/api/chat` menține cheia OpenAI pe server și evită expunerea în bundle.
