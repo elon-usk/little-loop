@@ -1,18 +1,10 @@
 {
   "version": 2,
   "functions": {
-    "api/**/*.{js,ts}": {
-      "runtime": "vercel-nodejs@^3.0.0"
-    }
+    "api/**/*.{js,ts}": {}
   },
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
