@@ -8,10 +8,10 @@
   "server": "node scripts/server.js",
   "prebuild": "node scripts/generate-sitemap.js",
   "build": "vite build",
-  "vercel-build": "vite build",
   "preview": "vite preview",
   "format": "prettier --write \"src/**/*.{js,jsx,json,css}\""
 },
+
   "dependencies": {
     "@mdx-js/react": "^3.1.1",
     "@mdx-js/rollup": "^3.1.1",

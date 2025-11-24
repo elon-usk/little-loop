@@ -1,7 +1,6 @@
-import fetch from "node-fetch";
-
 const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
 const DEFAULT_MODEL = "gpt-4o-mini";
+
 const SYSTEM_PROMPT = `Ești LittleLoop AI, un asistent empatic pentru părinți și copii interesați de activități creative în București și acasă. Răspunde mereu în limba română, cu un ton cald și practic, oferind idei scurte și concrete. Nu oferi sfaturi medicale sau diagnostice și recomandă întotdeauna consultul unui medic atunci când primești întrebări de sănătate. Dacă nu știi un răspuns, spune asta politicos și îndrumă spre resurse utile.`;
 
 const ensureArrayOfMessages = (history = []) => {
@@ -46,6 +45,7 @@ export default async function handler(req, res) {
   }
 
   const messages = ensureArrayOfMessages(history);
+
   const payload = {
     model: process.env.OPENAI_MODEL || DEFAULT_MODEL,
     temperature: 0.6,
