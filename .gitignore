@@ -4,7 +4,7 @@ node_modules/
 # Build output
 dist/
 
-# Environment files (do not commit secrets)
+# Environment files (but keep example)
 .env
 .env.*
 !.env.example
