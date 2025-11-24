@@ -2,11 +2,17 @@
   "version": 2,
   "functions": {
     "api/**/*.{js,ts}": {
-      "runtime": "nodejs18.x"
+      "runtime": "vercel-nodejs@^3.0.0"
     }
   },
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }
