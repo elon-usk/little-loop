@@ -1,15 +1,10 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import InteractiveMap from "../components/InteractiveMap.jsx";
 import Seo from "../components/Seo.jsx";
 import heroImage from "../assets/herowall11.png";
 import aiLogo from "../assets/ailogo3.png";
 import { askLittleLoopAI } from "../lib/aiClient.js";
+import BlogPreviewSection from "../components/BlogPreviewSection.jsx";
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -31,47 +26,6 @@ export default function Home() {
   const [chatError, setChatError] = useState("");
 
   const heroCtaText = "Împreună, desenăm amintiri";
-
-  const shopItems = useMemo(
-    () => [
-      {
-        id: "story-kit",
-        name: "Kit de Povestit",
-        price: "69 RON",
-        description:
-          "Carduri ilustrate și ghiduri pentru a inventa povești împreună.",
-      },
-      {
-        id: "art-pack",
-        name: "Pachet Artistic Mini",
-        price: "54 RON",
-        description:
-          "Set creativ cu stickere, hârtie texturată și idei de colaje.",
-      },
-      {
-        id: "city-pass",
-        name: "Abonament Explorator Urban",
-        price: "129 RON",
-        description:
-          "Acces la cinci spații culturale family-friendly din București.",
-      },
-      {
-        id: "playbox",
-        name: "Cutia STEM Playbox",
-        price: "115 RON",
-        description:
-          "Experimente simple de știință pentru copii curioși între 6-10 ani.",
-      },
-      {
-        id: "printables",
-        name: "Pachet Printabile",
-        price: "39 RON",
-        description:
-          "Fișe de activități, planuri de weekend și checklist-uri tematice.",
-      },
-    ],
-    []
-  );
 
   const calculateHeight = useCallback(() => {
     const heroEl = heroRef.current;
@@ -317,38 +271,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SHOP SECTION */}
-      <section className="section shop-section" aria-labelledby="shop-title">
-        <div className="container">
-          <div className="shop-intro">
-            <span className="shop-tag">Nou</span>
-            <h2 id="shop-title">Magazinul LittleLoop</h2>
-            <p>
-              Resurse digitale și kituri pregătite să transforme timpul petrecut
-              împreună în amintiri creative. Alege ce vi se potrivește și hai
-              să construim lucruri frumoase.
-            </p>
-          </div>
-
-          <div className="shop-grid">
-            {shopItems.map((item) => (
-              <article key={item.id} className="shop-card">
-                <div className="shop-card-media" aria-hidden="true" />
-                <div className="shop-card-body">
-                  <h3 className="shop-card-title">{item.name}</h3>
-                  <p className="shop-card-copy">{item.description}</p>
-                  <div className="shop-card-meta">
-                    <span className="shop-card-price">{item.price}</span>
-                    <button type="button" className="shop-card-button">
-                      Adaugă în coș
-                    </button>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <BlogPreviewSection />
     </>
   );
 }

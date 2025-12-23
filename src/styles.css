@@ -1158,3 +1158,72 @@ img {
   transform: translateY(0);
   box-shadow: 0 8px 16px rgba(233, 79, 55, 0.17);
 }
+
+/* =========================
+   LittleLoop Blog Typography
+   ========================= */
+
+.prose {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-family: inherit;
+}
+
+/* =========================
+   Blog reading surface
+   ========================= */
+
+.prose {
+  background: #fffef8;          /* warm, paper-like off-white */
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile refinement */
+@media (max-width: 640px) {
+  .prose {
+    padding: 1.5rem 1.25rem;
+    border-radius: 12px;
+  }
+}
+
+/* =========================
+   Blog post header tuning
+   ========================= */
+
+/* Remove extra top margin from first heading */
+.prose h1:first-of-type {
+  margin-top: 0;
+}
+
+/* Tighten spacing below the title */
+.prose h1:first-of-type {
+  margin-bottom: 0.75rem;
+}
+
+/* Date styling */
+.prose time,
+.prose .post-date {
+  display: block;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Tags styling */
+.prose .post-tags {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* Ensure following content starts cleanly */
+.prose h2 {
+  margin-top: 2rem;
+}
