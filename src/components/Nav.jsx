@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import logoImage from "../assets/logo2.png";
+import logoImage from "../assets/LittleLoop_Logo_Sapca.png";
 
 const ANNOUNCEMENT_HIDE_SCROLL = 140;
 const HERO_OFFSET_BUFFER = 120;

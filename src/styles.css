@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Borel&family=Parkinsans:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Borel&family=Parkinsans:wght@400;600;700&family=Montserrat+Alternates:ital,wght@0,400;0,600;1,400&display=swap");
 
 :root {
   /* LittleLoop palette */
@@ -168,42 +168,25 @@ img {
 .brand {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .brand-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: 2px solid transparent;
-  transition:
-    border-color 0.2s ease,
-    transform 0.2s ease;
-  font-family:
-    "Parkinsans",
-    Inter,
-    system-ui,
-    Segoe UI,
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif;
-}
-.nav-scrolled .brand-link {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 10px 24px rgba(46, 46, 46, 0.08);
-}
-.brand-link:hover,
-.brand-link:focus-visible {
-  border-color: #f05a1e;
-  transform: translateY(-2px);
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: none;
   outline: none;
 }
 .brand-logo {
   display: block;
-  height: 58px;
+  height: 77px;
   width: auto;
+  transition: none;
 }
 .menu {
   display: flex;
@@ -335,10 +318,10 @@ img {
     order: -1;
   }
   .brand-link {
-    padding: 6px 10px;
+    padding: 0;
   }
   .brand-logo {
-    height: 48px;
+    height: 64px;
   }
   .menu,
   .menu-left,
@@ -725,7 +708,7 @@ img {
     padding: 8px 14px;
   }
   .brand-logo {
-    height: 34px;
+    height: 45px;
   }
   .nav-link {
     padding: 8px 0;
@@ -1164,13 +1147,56 @@ img {
    ========================= */
 
 .prose {
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Parkinsans",
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  --blog-scale: 0.5;
+  --blog-content-scale: 0.75;
+  letter-spacing: -0.03em;
+  line-height: 1.55;
 }
 
-.prose h1,
-.prose h2,
-.prose h3 {
-  font-family: inherit;
+.prose p {
+  font-size: calc(
+    clamp(1.25rem, 3vw, 2.3125rem) * var(--blog-scale, 1) * var(--blog-content-scale, 1)
+  );
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.prose h1 {
+  font-family:
+    "Parkinsans",
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 600;
+  font-size: calc(
+    clamp(3rem, 10vw, 8rem) * var(--blog-scale, 1) * var(--blog-content-scale, 1)
+  );
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.prose h2 {
+  font-family:
+    "Montserrat Alternates",
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 600;
+  font-size: calc(
+    clamp(2.25rem, 6vw, 5.5rem) * var(--blog-scale, 1) * var(--blog-content-scale, 1)
+  );
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-top: 2.5rem;
 }
 
 /* =========================
@@ -1208,22 +1234,40 @@ img {
 
 /* Date styling */
 .prose time,
-.prose .post-date {
+.prose .post-meta {
   display: block;
   margin-top: 0.25rem;
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
+  font-family:
+    "Montserrat Alternates",
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: calc(clamp(1rem, 2.5vw, 1.5625rem) * var(--blog-scale, 1)); /* up to 25px */
+  letter-spacing: -0.03em;
   color: #666;
+  line-height: 1.4;
 }
 
 /* Tags styling */
 .prose .post-tags {
   margin-bottom: 1.5rem;
-  font-size: 0.9rem;
+  font-family:
+    "Montserrat Alternates",
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 400;
+  font-size: calc(clamp(1rem, 2.5vw, 1.5625rem) * var(--blog-scale, 1));
+  letter-spacing: -0.03em;
   color: #444;
 }
 
 /* Ensure following content starts cleanly */
 .prose h2 {
-  margin-top: 2rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
 }

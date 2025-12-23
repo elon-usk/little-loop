@@ -137,12 +137,12 @@ export default function BlogPost() {
       />
       <article className="prose mx-auto py-10">
         <h1>{post.title}</h1>
-        <p className="text-gray-600">
+        <p className="post-meta text-gray-600">
           {new Date(post.date).toLocaleDateString("ro-RO")}
         </p>
 
         {post.tags && (
-          <p className="text-blue-600">{post.tags.join(" • ")}</p>
+          <p className="post-tags text-blue-600">{post.tags.join(" • ")}</p>
         )}
 
         <MDXWrapper>
