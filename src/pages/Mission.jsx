@@ -10,16 +10,21 @@ export default function Mission() {
         path="/misiune"
       />
       <main id="main" className="section container">
-        <h2>Misiunea noastră</h2>
+        <h1>Misiunea LittleLoop</h1>
         <p>
-          Încurajăm gândirea critică, dialogul deschis și susținem business-uri din
-          comunitate cu impact pozitiv. Ne dorim familii conectate, informate și inspirate.
+          Little Loop există pentru a transforma parenting-ul dintr-o serie de griji
+          într-o aventură memorabilă. Credem că o viață fericită este o viață împărtășită.
         </p>
-        <ul className="bullets">
-          <li>Programe pentru starea de bine a familiei.</li>
-          <li>Educație prin joc și creativitate.</li>
-          <li>Resurse curate, prietenoase și utile.</li>
-        </ul>
+        <p>
+          Fie că ești în căutarea unui loc de joacă unde să-ți poți auzi gândurile,
+          a unei comunități care te înțelege sau a unor alegeri sustenabile pentru viitorul
+          lor, aici e locul tău.
+        </p>
+        <p>
+          Promovăm gândirea critică, alegerile conștiente și curajul de a crește copii
+          liberi. Împletim utilul cu plăcutul, pentru familii care vor să trăiască,
+          nu doar să bifeze task-uri.
+        </p>
       </main>
     </>
   );

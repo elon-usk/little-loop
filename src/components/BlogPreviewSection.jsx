@@ -44,7 +44,7 @@ export default function BlogPreviewSection() {
       <div className="container">
         <div className="shop-intro">
           <span className="shop-tag">Blog</span>
-          <h2 id="blog-preview-title">Blogul lui LittleLoop</h2>
+          <h2 id="blog-preview-title">LittleLoop Blog</h2>
           <p>
             Trei povești recente, selectate pentru a inspira momente liniștite
             împreună.

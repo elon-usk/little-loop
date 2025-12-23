@@ -8,14 +8,11 @@ const HERO_MIN_THRESHOLD = 140;
 
 const navLinks = [
   { label: "Acasă", href: "/", match: "/" },
-  { label: "Povestea", href: "/poveste", match: "/poveste" },
-  { label: "Misiunea", href: "/misiune", match: "/misiune" },
+  { label: "Misiune", href: "/misiune", match: "/misiune" },
   { label: "Blog", href: "/blog", match: "/blog" },
-  { label: "Activități", href: "/activitati", match: "/activitati" },
-  { label: "Resurse", href: "/resurse", match: "/resurse" },
-  { label: "Comunitatea", href: "/comunitate", match: "/comunitate" },
-  { label: "Contact", href: "/contact", match: "/contact" },
 ];
+
+const ctaLink = { label: "Contact", href: "/contact", match: "/contact" };
 
 export default function Nav({ brand = "littleloop.ro" }) {
   const location = useLocation();
@@ -31,9 +28,8 @@ export default function Nav({ brand = "littleloop.ro" }) {
   const prevLogoOnlyRef = React.useRef(false);
   const returnTimeoutRef = React.useRef(null);
 
-  const leftLinks = React.useMemo(() => navLinks.slice(0, 4), []);
-  const rightLinks = React.useMemo(() => navLinks.slice(4, 7), []);
-  const ctaLink = navLinks[7];
+  const leftLinks = React.useMemo(() => navLinks.slice(0, 2), []);
+  const rightLinks = React.useMemo(() => navLinks.slice(2), []);
 
   // clean up timeout on unmount
   React.useEffect(() => {
@@ -177,7 +173,9 @@ export default function Nav({ brand = "littleloop.ro" }) {
                   key={link.href}
                   role="menuitem"
                   to={link.href}
-                  className={`nav-link ${isActive ? "is-active" : ""}`}
+                  className={`nav-link nav-link-primary ${
+                    isActive ? "is-active" : ""
+                  }`}
                   aria-current={isActive ? "page" : undefined}
                 >
                   <span className="nav-link-label">{link.label}</span>
@@ -204,7 +202,9 @@ export default function Nav({ brand = "littleloop.ro" }) {
                     key={link.href}
                     role="menuitem"
                     to={link.href}
-                    className={`nav-link ${isActive ? "is-active" : ""}`}
+                    className={`nav-link nav-link-primary ${
+                      isActive ? "is-active" : ""
+                    }`}
                     aria-current={isActive ? "page" : undefined}
                   >
                     <span className="nav-link-label">{link.label}</span>

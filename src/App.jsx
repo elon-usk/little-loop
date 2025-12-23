@@ -6,7 +6,6 @@ import Nav from "./components/Nav.jsx";
 import Footer from "./components/Footer.jsx";
 
 import Home from "./pages/Home.jsx";
-import Story from "./pages/Story.jsx";
 import Mission from "./pages/Mission.jsx";
 import Activities from "./pages/Activities.jsx";
 import Resources from "./pages/Resources.jsx";
@@ -29,7 +28,6 @@ export default function App() {
         <main id="main">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/poveste" element={<Story />} />
             <Route path="/misiune" element={<Mission />} />
             <Route path="/activitati" element={<Activities />} />
             <Route path="/resurse" element={<Resources />} />

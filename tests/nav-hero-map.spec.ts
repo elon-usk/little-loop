@@ -15,9 +15,10 @@ test('header renders logo and nav', async ({ page }) => {
 
   // Nav items present (scope to header to avoid CTA matches)
   const header = page.locator('.site-header')
-  await expect(header.getByRole('link', { name: 'Povestea' })).toBeVisible()
-  await expect(header.getByRole('link', { name: 'Misiunea' })).toBeVisible()
-  await expect(header.getByRole('link', { name: 'Comunitatea' })).toBeVisible()
+  await expect(header.getByRole('link', { name: 'Acasă' })).toBeVisible()
+  await expect(header.getByRole('link', { name: 'Misiune' })).toBeVisible()
+  await expect(header.getByRole('link', { name: 'Blog' })).toBeVisible()
+  await expect(header.getByRole('link', { name: 'Contact' })).toBeVisible()
 })
 
 test('hero heading and subtext are stacked closely', async ({ page }) => {

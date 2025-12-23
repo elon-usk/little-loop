@@ -11,7 +11,6 @@ const OUTPUT_FILE = path.join(ROOT, "public", "sitemap.xml");
 
 const staticRoutes = [
   "/",
-  "/poveste",
   "/misiune",
   "/activitati",
   "/resurse",

@@ -7,7 +7,7 @@ Site-ul LittleLoop este o aplicație Vite + React dedicată părinților din Rom
 ```
 src/
  ├─ entries/       # Puncte de intrare pentru fiecare HTML static
- ├─ pages/         # Componente React pentru pagini (Home, Story etc.)
+ ├─ pages/         # Componente React pentru pagini (Home, Mission etc.)
  ├─ components/    # Nav, Footer, InteractiveMap, Blog, CTA
  ├─ content/       # Articole MDX cu frontmatter
  ├─ data/          # Stiluri/JSON pentru MapLibre (PMTiles/MapTiler)
@@ -19,9 +19,9 @@ public/
 
 ## Fluxul aplicației
 
-- HTML-urile statice (`index.html`, `poveste.html` etc.) încarcă scripturi din `src/entries/*.jsx`, care redau `<Nav />`, pagina corespunzătoare și `<Footer />`.
+- HTML-urile statice (`index.html`, `misiune.html` etc.) încarcă scripturi din `src/entries/*.jsx`, care redau `<Nav />`, pagina corespunzătoare și `<Footer />`.
 - `src/pages/Home.jsx` include hero-ul cu consola AI, harta MapLibre și secțiunea shop.
-- Pagini precum `Story`, `Mission`, `Resources`, `Community`, `Contact` sunt componente independente din `src/pages/`.
+- Pagini precum `Home`, `Mission`, `Resources`, `Community`, `Contact` sunt componente independente din `src/pages/`.
 - Blog-ul folosește MDX: fișierele din `src/content/*.mdx` exportă `frontmatter`; `src/utils/getPosts.js` le importă și construiește lista. `BlogIndex.jsx` afișează articolele, iar `BlogPost.jsx` redă conținutul și inserează `CustomCTA`.
 - Hartă: `src/components/InteractiveMap.jsx` creează instanța MapLibre (folosind un stil local JSON sau MapTiler) și adaugă markerul București.
 - Asistent AI: `Home.jsx` păstrează starea conversației, iar `src/lib/aiClient.js` apelează endpoint-ul `/api/chat` (funcție serverless sau server Node) care trimite cererea către OpenAI.
